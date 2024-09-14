@@ -1,13 +1,35 @@
-# Stata Beginer Guide
+# Tips for PS1
 
-## Basic commands
+## Stata Beginer Guide
+
+### Installation
+
+- Option 1: Download Stata from the official website and install it on your computer (requires a purchased license).
+- Option 2: Use Stata through a Virtual SINC Site
+  - upload your data files to the virtual site (via Virtual SINC Site W11 Desktop, Upload Button)
+  - run Stata in the browser
+  - Safari is recommended for Mac users.
+
+### Some important file types
+
+- .do file: the script file that contains Stata commands.
+- .dta file: the data file format used by Stata.
+- .log file: a file that records the output of your Stata commands.
+
+### Basic commands
+
+Set a working directory
+
+```stata
+cd "~/your_directory"
+```
 
 Open a log file
 
 ```stata
 log using "log_file.log", replace
 
-* Run your commands here
+* [your commands here]
 
 log close
 ```
@@ -72,7 +94,7 @@ IV1_weight = ...
 summarize IV1*
 ```
 
-## Install third party packages
+### Install third party packages
 
 For example, package `ivreghdfe` is for running IV regression with fixed effects. It is not included in the official Stata package. You can install it by running the following command in Stata:
 
@@ -96,7 +118,7 @@ net install ivreghdfe, from("https://raw.githubusercontent.com/sergiocorreia/ivr
 
 Here is the GitHub repository for `ivreghdfe`: [ivreghdfe](https://github.com/sergiocorreia/ivreghdfe) in case you want to check.
 
-## IV regression with fixed effects
+### IV regression with fixed effects
 
 ```stata
 * Run IV regression with fixed effects
