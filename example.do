@@ -23,15 +23,16 @@ clear all
 set more off
 
 * set working directory
-global eco324_ps1 "\\mysbfiles.campus.stonybrook.edu\liangzhu\eco324\ps1\"
-// Note, you need to replace "\liangzhu\eco324\ps1\" with your own username and folder path
+cd "\\mysbfiles.campus.stonybrook.edu\liangzhu\eco324\ps1"
+// Note, you need to replace "\liangzhu\eco324\ps1" with your own username and folder path
 
-
-* open logging
-log using "${eco324_ps1}example.log", replace
+* start logging
+log using "example.log", replace
 
 * import data
 import delimited using ${eco324_ps1}verboven_cars.csv, clear
+
+* [your project code here] * 
 
 * close logging
 log close
