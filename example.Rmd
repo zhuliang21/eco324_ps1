@@ -1,0 +1,54 @@
+# Example R Markdown Document
+
+Install Tidyverse Package
+
+```{r}
+if (!requireNamespace("tidyverse", quietly = TRUE)) {
+  install.packages("tidyverse")
+}
+
+library(tidyverse)
+```
+
+Set the Working Directory
+
+```{r}
+setwd("~/Projects/eco324_ps1")
+```
+
+Load the Data
+
+```{r}
+data <- read.csv("verboven_cars.csv")
+```
+
+Summary Statistics
+
+```{r}
+summary(data)
+```
+
+Rename a variable
+
+```{r}
+data <- data %>%
+  rename(year = ye)
+```
+
+Generate a new variable based on existing variables
+
+```{r}
+data <- data %>%
+  mutate(market_size = pop/4)
+```
+
+
+```{r}
+# Install fixest if not already installed
+if (!requireNamespace("fixest", quietly = TRUE)) {
+  install.packages("fixest")
+}
+
+library(fixest)
+```
+

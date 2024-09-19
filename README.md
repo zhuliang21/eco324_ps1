@@ -122,7 +122,124 @@ Here is the GitHub repository for `ivreghdfe`: [ivreghdfe](https://github.com/se
 
 ```stata
 * Run IV regression with fixed effects
-ivreghdfe y (x1 = IV*) x2 x3, absorb(fe_var)
+ivreghdfe y (x1 = IV*) x2 x3, absorb(fe_var1, fe_var2, fe_var3)
 ```
 
 it will run a regression of y on x1, x2, x3, with x1 being instrumented by all IVs starting with IV, and fixed effects of fe_var.
+
+## R Beginner Guide
+
+### R Installation
+
+- Option 1: Download R and RStudio from the official websites and install them on your computer. (R is free and open-source).
+- Option 2: Use R through a Virtual SINC Site
+  - upload your data files to the virtual site (via Virtual SINC Site W11 Desktop, Upload Button)
+  - run R in the browser
+  - Safari is recommended for Mac users.
+
+### Script file type
+
+- .R file: the script file that contains R commands.
+- .Rmd file: R Markdown file for dynamic documents.
+
+### Enable Copilot in RStudio
+
+1. Open RStudio.
+2. Go to Tools > Global Options.
+3. Go to Coplilot, enable GitHub Copilot, and sign in with GitHub account. You need to have a GitHub Copilot subscription to use it. (Free for students with verification).
+
+### Install Tidyverse and use it for data manipulation
+
+```r
+if (!requireNamespace("tidyverse", quietly = TRUE)) {
+  install.packages("tidyverse")
+}
+
+library(tidyverse)
+```
+
+### Basic commands with Tidyverse
+
+Set a working directory
+
+```r
+setwd("~/your_directory")
+```
+
+Open a log file
+
+```r
+sink("log_file.log")
+```
+
+Import csv data file to R
+
+```r
+data <- read.csv("data.csv")
+```
+
+Rename a variable
+
+```r
+
+data <- data %>%
+  rename(new_name = old_name)
+```
+
+Select specific columns
+
+```r
+data <- data %>%
+  select(column1, column2)
+```
+
+Generate a new variable
+
+```r
+data <- data %>%
+  mutate(new_var = old_var1 / 100)
+```
+
+Drop a variable
+
+```r
+data <- data %>%
+  select(-var_name)
+```
+
+Summary statistics
+
+```r
+# Summary statistics for all variables in dataframe 'data'
+summary(data)
+```
+
+Run a regression
+
+```r
+# Run a simple OLS regression
+model <- lm(y ~ x1 + x2, data = data)
+```
+
+### Install third party packages to support IV regression with multiple-level fixed effects
+
+For example, package `fixest` is for running IV regression with fixed effects. You can install it by running the following command in R:
+
+```r
+# Install fixest if not already installed
+if (!requireNamespace("fixest", quietly = TRUE)) {
+  install.packages("fixest")
+}
+# Do you want to install from sources the package which needs compilation? (Yes/no/cancel), answer no
+library(fixest)
+```
+
+### IV regression with multiple fixed effects
+
+```r
+# Run IV regression with fixed effects
+model <- feols(y ~ x1 | fe_var1 + fe_var2 + fe_var3, (endogenous_variable ~ i v1 + iv2), data = data)
+
+# Summary of the model
+summary(model)
+```
