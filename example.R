@@ -1,41 +1,21 @@
-# Example R Markdown Documen
-
-Install Tidyverse Package
-
-```{r}
+# Install the tidyverse package
 if (!requireNamespace("tidyverse", quietly = TRUE)) {
   install.packages("tidyverse")
 }
 
 library(tidyverse)
-```
 
-Clear the Environment
-```{r}
-rm(list = ls())
-```
+# clear environment
+rm(list=ls())
 
-Set the Working Directory
-
-```{r}
+# set working directory
 setwd("~/Projects/eco324_ps1")
-```
 
-Load the Data
-
-```{r}
+# load the data
 data <- read.csv("verboven_cars.csv")
-```
 
-Summary Statistics
 
-```{r}
-summary(data)
-```
-
-Rename a variable
-
-```{r}
+# rename variables
 data <- data %>%
   rename(year = ye,
          country = ma,
@@ -47,11 +27,8 @@ data <- data %>%
          weight = we,
          demographic = home,
          quantity = qu)
-```
 
-Generate a new variable based on existing variables
-
-```{r}
+# generate new variables
 data <- data %>%
   mutate(market_size = population/4) %>%
   # calculate market share s_j
@@ -62,17 +39,18 @@ data <- data %>%
   mutate(s_0 = 1 - sum(s_j)) %>%
   ungroup() %>%
   # calculate y = log(s_j) - log(s_0)
-  mutate(y = log(s_j) - log(s_0))
-```
+  mutate(y = log(s_j) - log(s_0)) %>%
+  # calculate ln_pop and ln_gdp
+  mutate(ln_pop = log(population),
+         ln_gdp = log(ngdp)) %>%
+  # calculate price = eurpr/1000
+  mutate(price = eurpr/1000)
 
-Install the `fixest` package for fixed effects regression
-
-```{r}
-# Install fixest if not already installed
+# Install the `fixest` package for fixed effects regression
 if (!requireNamespace("fixest", quietly = TRUE)) {
   install.packages("fixest")
 }
 
 library(fixest)
-```
+
 
