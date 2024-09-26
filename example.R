@@ -53,4 +53,13 @@ if (!requireNamespace("fixest", quietly = TRUE)) {
 
 library(fixest)
 
+# run a fixed effect regression by fixest package
+# fixed effects comes from year, country, and brand
+# y is the dependent variable, 
+# price, horsepower, width, height, weight, fuel, demographic, ln_pop, ln_gdp are 
+# the independent variables
 
+fe_reg <- feols(y ~ price + horsepower + width + height + weight + fuel + demographic + ln_pop + ln_gdp | year + country + brand, data = data)
+
+# print the regression results
+summary(fe_reg)
